@@ -20,7 +20,6 @@ function BasicLayout() {
         {/* child components get injected here and replace <Outlet /> */}
         <Outlet />
     </div>
-    <footer>DELETE ME LATER THIS IS TEMP</footer>
     </>
     )
 }
