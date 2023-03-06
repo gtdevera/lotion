@@ -9,8 +9,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route element={<BasicLayout/>}>
-          <Route path="/" element={<Reader/>}></Route>
-          <Route path="/edit" element={<Editor/>}></Route>
+          <Route path="/notes/:notes-id" element={<Reader/>}></Route>
+          <Route path="/notes/:notes-id/edit" element={<Editor/>}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
