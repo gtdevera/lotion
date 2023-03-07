@@ -1,9 +1,14 @@
 import { Outlet } from "react-router-dom";
-import useToggle from './toggleFile'
+import useToggle from './toggleFile';
+import { useNavigate } from 'react-router-dom';
 
 function BasicLayout() {
     const [toggle, setToggle] = useToggle();
+    const navig = useNavigate();
 
+    const addNote = () => {
+        navig('/notes/' + 1);
+    }
     return (
     <>
     <header>
@@ -21,12 +26,17 @@ function BasicLayout() {
     </header>
     <div id="content">
         {toggle && (
+        <section id = "noteSidebar">
         <div id="noteTracker">
             <p id="noteTitle">
-                Body contento
+                <strong>Notes</strong>
             </p>
-            <button id= "Add">+</button>
+            <button id= "Add" onClick = {addNote}>+</button>
         </div>
+        <div>
+            Put box 
+        </div>
+        </section>
         )}
         {/* child components get injected here and replace <Outlet /> */}
         <Outlet />

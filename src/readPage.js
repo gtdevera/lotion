@@ -7,11 +7,6 @@ function Reader() {
     return( 
         <>
         <section id="body">
-            <div id="noteTracker">
-                 <p id="noteTitle">
-                    Bodyodyodyody
-                </p>
-            </div>
             <div id="editNote">
             </div>
         </section>

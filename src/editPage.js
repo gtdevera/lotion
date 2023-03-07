@@ -6,15 +6,24 @@ import { useNavigate, useParams } from "react-router-dom";
 function Editor() {
     const [noteNum, setCount] = useState(1);
     const navigate = useNavigate();
-    const {userId} = useParams();
-    console.log(userId);
+    var {userId} = useParams();
+   // console.log(userId);
 
     const saveNote = () =>{
 
-        // let wordContent = document.getElementsByTagName("p");
-        //localStorage.setItem(noteNum);
-        // console.log(wordContent);
-        navigate('/notes/:notes-id');
+        const title = document.getElementById("editTitle");
+        const textBox = document.getElementsByClassName("ql-editor")[0];
+        console.log(title);
+        console.log(textBox);
+
+        let titleSaved = title.value;
+        let textOverall = textBox.innerHTML;
+        let savedNoteData = {title, textOverall};
+        console.log(savedNoteData);
+
+        localStorage.setItem(String(noteNum), savedNoteData);
+
+        // navigate('/notes/' + noteNum);
         setCount(noteNum + 1);
     }
 
