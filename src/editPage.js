@@ -8,6 +8,8 @@ function Editor() {
     const navigate = useNavigate();
     var {userId} = useParams();
    // console.log(userId);
+   let values = JSON.parse(localStorage.getItem(String(noteNum)));
+   console.log(values.text);
 
     const saveNote = () =>{
 
@@ -18,13 +20,13 @@ function Editor() {
 
         let titleSaved = title.value;
         let textOverall = textBox.innerHTML;
-        let savedNoteData = {title, textOverall};
+        let savedNoteData = {title: titleSaved, text: textOverall};
         console.log(savedNoteData);
 
-        localStorage.setItem(String(noteNum), savedNoteData);
+        localStorage.setItem(String(noteNum), JSON.stringify(savedNoteData));
 
         // navigate('/notes/' + noteNum);
-        setCount(noteNum + 1);
+        //setCount(noteNum + 1);
     }
 
     return( 
