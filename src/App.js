@@ -6,12 +6,13 @@ import Editor from './editPage';
 import { useNavigate, useParams } from "react-router-dom";
 
 function App() {
+
   return(
     <BrowserRouter>
       <Routes>
         <Route element={<BasicLayout/>}>
-          <Route path="/notes/:notes-id" element={<Reader/>}></Route>
-          <Route path="/notes/:notes-id/edit" element={<Editor/>}></Route>
+          <Route path="/notes/:notesId" element={<Reader/>} component = {Reader}></Route>
+          <Route path="/notes/:notesId/edit" element={<Editor/>} component = {Editor}></Route>
         </Route>
       </Routes>
     </BrowserRouter>

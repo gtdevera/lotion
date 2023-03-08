@@ -7,7 +7,15 @@ function BasicLayout() {
     const navig = useNavigate();
 
     const addNote = () => {
-        navig('/notes/' + 1);
+        const newNodeAdded = document.createElement("p");
+        newNodeAdded.className = "miniNote";
+        const title = document.createTextNode("Untitled Note ");
+        const text = document.createTextNode("Placeholder text");
+        newNodeAdded.appendChild(title);
+        newNodeAdded.appendChild(text);
+        document.getElementById("placeNotes").appendChild(newNodeAdded);
+
+        //navig('/notes/' + 1);
     }
     return (
     <>
@@ -33,8 +41,7 @@ function BasicLayout() {
             </p>
             <button id= "Add" onClick = {addNote}>+</button>
         </div>
-        <div>
-            Put box 
+        <div id ="placeNotes">
         </div>
         </section>
         )}

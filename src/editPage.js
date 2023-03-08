@@ -6,10 +6,10 @@ import { useNavigate, useParams } from "react-router-dom";
 function Editor() {
     const [noteNum, setCount] = useState(1);
     const navigate = useNavigate();
-    var {userId} = useParams();
+    const {notesId} = useParams();
    // console.log(userId);
    let values = JSON.parse(localStorage.getItem(String(noteNum)));
-   console.log(values.text);
+   console.log(values.title);
 
     const saveNote = () =>{
 
@@ -25,7 +25,7 @@ function Editor() {
 
         localStorage.setItem(String(noteNum), JSON.stringify(savedNoteData));
 
-        // navigate('/notes/' + noteNum);
+        navigate('/notes/' + notesId);
         //setCount(noteNum + 1);
     }
 
