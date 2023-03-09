@@ -4,15 +4,23 @@ import MyComponent from './Component';
 import { useNavigate, useParams } from "react-router-dom";
 
 function Editor() {
-    const [noteNum, setCount] = useState(1);
     const navigate = useNavigate();
     const {notesId} = useParams();
-   // console.log(userId);
-   let values = JSON.parse(localStorage.getItem(String(noteNum)));
-   console.log(values.title);
+    setTimeout(function() {
+        if(localStorage.getItem(notesId) != null) {
+            let storedValue = JSON.parse(localStorage.getItem(notesId));
+            const title = document.getElementById("editTitle");
+            const textBox = document.getElementsByClassName("ql-editor")[0];
+
+            let storedTitle = storedValue.title;
+            let storedText = storedValue.text;
+
+            title.value = storedTitle;
+            textBox.innerHTML = storedText;
+        }
+    }, 1);
 
     const saveNote = () =>{
-
         const title = document.getElementById("editTitle");
         const textBox = document.getElementsByClassName("ql-editor")[0];
         console.log(title);
@@ -23,10 +31,13 @@ function Editor() {
         let savedNoteData = {title: titleSaved, text: textOverall};
         console.log(savedNoteData);
 
-        localStorage.setItem(String(noteNum), JSON.stringify(savedNoteData));
+        localStorage.setItem(String(notesId), JSON.stringify(savedNoteData));
+
+        const miniNoteBox = document.getElementsByClassName("miniNote")[notesId - 1];
+        miniNoteBox.childNodes[0].textContent = titleSaved;
+        miniNoteBox.childNodes[1].innerHTML = textOverall;
 
         navigate('/notes/' + notesId);
-        //setCount(noteNum + 1);
     }
 
     return( 

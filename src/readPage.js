@@ -6,20 +6,26 @@ import { useNavigate, useParams } from "react-router-dom";
 function Reader() {
     const {notesId } = useParams();
     const navigate = useNavigate();
-    let chosenNoteText = JSON.parse(localStorage.getItem("1"));
-    let bigNoteTitle = chosenNoteText.title;
-    let bigNoteText = chosenNoteText.text;
 
-    window.onload = function() {
-        let noteDisplay = document.getElementById("readingText");
-        noteDisplay.innerHTML = bigNoteText;
+    
+    //localStorage.clear();
+
+    
+    for(let i = 0; i < parseInt(notesId); i++) {
+        if(localStorage.getItem(String(i + 1)) != null ) {
+            var chosenNoteText = JSON.parse(localStorage.getItem(notesId));
+            var bigNoteTitle = chosenNoteText.title;
+            var bigNoteText = chosenNoteText.text;
+        }
     }
-    console.log(notesId);
-
-    console.log(bigNoteTitle, bigNoteText);
+    setTimeout(function() {
+        let noteDisplay = document.getElementById("readingText");
+        if(bigNoteText != null) {
+            noteDisplay.innerHTML = bigNoteText;
+        }
+    }, 1);
     
     const editNote = () => {
-
         navigate("/notes/" + notesId + "/edit");
     }
 
@@ -34,8 +40,8 @@ function Reader() {
                     <button id="Edit" onClick = {editNote}>Edit</button>
                     <button id="Delete">Delete</button>
                 </div>
-                <p id = "readingText">
-                </p>
+                <div id = "readingText">
+                </div>
             </div>
         </section>
         </>
