@@ -29,6 +29,17 @@ function Reader() {
         navigate("/notes/" + notesId + "/edit");
     }
 
+    const deleteNote = () => {
+        const answer = window.confirm("Are you sure?");
+        if(answer) {
+            let deletedNoteId = parseInt(notesId) - 1;
+            const miniNoteBox = document.getElementsByClassName("miniNote")[deletedNoteId];
+            miniNoteBox.remove();
+            localStorage.removeItem(String(deletedNoteId));
+            navigate('/notes/' + deletedNoteId);
+        }
+    }
+
     return( 
         <>
         <section id="body">
@@ -38,7 +49,7 @@ function Reader() {
                         {bigNoteTitle}
                     </span>
                     <button id="Edit" onClick = {editNote}>Edit</button>
-                    <button id="Delete">Delete</button>
+                    <button id="Delete" onClick = {deleteNote}>Delete</button>
                 </div>
                 <div id = "readingText">
                 </div>

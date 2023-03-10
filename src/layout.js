@@ -1,47 +1,37 @@
-import { Outlet } from "react-router-dom";
+import React, { useState, useRef, useEffect } from 'react';
 import useToggle from './toggleFile';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, Outlet } from 'react-router-dom';
 
 function BasicLayout() {
     const [toggle, setToggle] = useToggle();
+    const [hasKids, setHasKids] = useState(false);
     const navig = useNavigate();
     let {notesId} = useParams();
 
 
     //localStorage.clear();
-
+    console.log(localStorage.length);
 
     const addNote = () => {
-        const constantNoteId = notesId;
-        const newNodeAdded = document.createElement("button");
-        newNodeAdded.className = "miniNote";
-        const title = document.createElement("p");
-        title.className = "miniNoteTitle";
-        let titleWords = document.createTextNode("Untitled Note");
-        const text = document.createElement("p");
-        let textWords = document.createTextNode("Placeholder text");
-        title.appendChild(titleWords);
-        text.appendChild(textWords);
-        newNodeAdded.appendChild(title);
-        newNodeAdded.appendChild(text);
-        document.getElementById("placeNotes").appendChild(newNodeAdded);
-
-        //navig('/notes/' + constantNoteId);
-
-        if(document.getElementById("placeNotes").children === null) {
-            console.log("It went here");
+        if(!(hasKids)) {
+            
+            noteCreation();
+            setHasKids(true);
             navig('/notes/' + String(notesId) + "/edit");     
         }
         else {
             notesId = parseInt(notesId) + 1;
+            noteCreation();
             navig('/notes/' + String(notesId) + "/edit");
         }
     }
 
     window.onload = function() {
-        for(let i = 0; i < parseInt(notesId); i++) {
-            if(localStorage.getItem(String(i + 1)) != null ) {
-                var chosenNoteText = JSON.parse(localStorage.getItem(notesId));
+        var numEntries = localStorage.length;
+        for(let i = 0; i < numEntries; i++) {
+            let valueIndex = String(i + 1);
+            if(localStorage.getItem(valueIndex) != null ) {
+                var chosenNoteText = JSON.parse(localStorage.getItem(valueIndex));
                 var bigNoteTitle = chosenNoteText.title;
                 var bigNoteText = chosenNoteText.text;
 
@@ -56,11 +46,33 @@ function BasicLayout() {
                 text.appendChild(textWords);
                 newNodeAdded.appendChild(title);
                 newNodeAdded.appendChild(text);
+                newNodeAdded.addEventListener("click", () => {
+                    navig('/notes/' + valueIndex);
+                })
                 document.getElementById("placeNotes").appendChild(newNodeAdded);
                 newNodeAdded.childNodes[1].innerHTML = bigNoteText;
             }
         }
     };
+
+    const noteCreation = () => {
+        let constantNoteId = notesId;
+        let newNodeAdded = document.createElement("button");
+        newNodeAdded.className = "miniNote";
+        const title = document.createElement("p");
+        title.className = "miniNoteTitle";
+        let titleWords = document.createTextNode("Untitled Note");
+        const text = document.createElement("p");
+        let textWords = document.createTextNode("Placeholder text");
+        title.appendChild(titleWords);
+        text.appendChild(textWords);
+        newNodeAdded.appendChild(title);
+        newNodeAdded.appendChild(text);
+        newNodeAdded.addEventListener("click", () => {
+            navig('/notes/' + constantNoteId);
+        })
+        document.getElementById("placeNotes").appendChild(newNodeAdded);
+    }
 
     return (
     <>

@@ -23,21 +23,28 @@ function Editor() {
     const saveNote = () =>{
         const title = document.getElementById("editTitle");
         const textBox = document.getElementsByClassName("ql-editor")[0];
-        console.log(title);
-        console.log(textBox);
-
         let titleSaved = title.value;
         let textOverall = textBox.innerHTML;
         let savedNoteData = {title: titleSaved, text: textOverall};
-        console.log(savedNoteData);
 
         localStorage.setItem(String(notesId), JSON.stringify(savedNoteData));
 
-        const miniNoteBox = document.getElementsByClassName("miniNote")[notesId - 1];
+        const miniNoteBox = document.getElementsByClassName("miniNote")[parseInt(notesId) - 1];
         miniNoteBox.childNodes[0].textContent = titleSaved;
         miniNoteBox.childNodes[1].innerHTML = textOverall;
 
         navigate('/notes/' + notesId);
+    }
+
+    const deleteNote = () => {
+        const answer = window.confirm("Are you sure?");
+        if(answer) {
+            let deletedNoteId = parseInt(notesId) - 1;
+            const miniNoteBox = document.getElementsByClassName("miniNote")[deletedNoteId];
+            miniNoteBox.remove();
+            localStorage.removeItem(String(deletedNoteId));
+            navigate('/notes/' + deletedNoteId);
+        }
     }
 
     return( 
@@ -47,7 +54,7 @@ function Editor() {
                 <div id="noteBar">
                     <input id="editTitle" placeholder='Untitled Note'></input>
                     <button id="Save" onClick = {saveNote}>Save</button>
-                    <button id="Delete">Delete</button>
+                    <button id="Delete" onClick={deleteNote}>Delete</button>
                 </div>
                 <MyComponent/>
             </div>

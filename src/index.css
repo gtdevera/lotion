@@ -94,6 +94,7 @@ button#Add{
 }
 button:hover{
   cursor: pointer;
+  background-color: darkslateblue;
 }
 button#Save{
   /* background-color: rgb(113, 153, 113); */
@@ -145,18 +146,14 @@ div#readingText{
 button.miniNote{
   height:100px;
   width:400px;
-  background-color: rgb(163, 156, 163);
-  margin:2px;
-  margin-right:10px;
-  margin-bottom:10px;
   overflow:hidden;
   text-align:left;
 }
 p.miniNoteTitle{
   font-size:25px;
-  margin:2px;
+  margin:1px;
 }
 p {
   font-family:'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  margin-left: 10px;
+  margin-left: 5px;
 }
