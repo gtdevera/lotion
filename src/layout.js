@@ -10,7 +10,6 @@ function BasicLayout() {
 
 
     //localStorage.clear();
-    console.log(localStorage.length);
 
     const addNote = () => {
         if(!(hasKids)) {
@@ -85,7 +84,7 @@ function BasicLayout() {
                 Lotion
             </h1>
             <h2>
-                releasemereleasemereleasemereleasemereleasemereleasemereleasemereleasemereleasemereleaseme
+                Like Notion but worse 
             </h2>
         </div>
     </header>

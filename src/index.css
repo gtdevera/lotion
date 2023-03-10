@@ -146,7 +146,9 @@ div#readingText{
 button.miniNote{
   height:100px;
   width:400px;
+  white-space: nowrap;
   overflow:hidden;
+  text-overflow: ellipsis;
   text-align:left;
 }
 p.miniNoteTitle{
