@@ -4,7 +4,7 @@ import { useNavigate, useParams, Outlet } from 'react-router-dom';
 
 function Beginning() {
     const navigate = useNavigate();
-    navigate(/notes/1);
+    navigate("/notes/1");
 }
 
 export default Beginning;
